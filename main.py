@@ -20,14 +20,16 @@ def print_initial():
 def select_action(num):
     
     if num == 1:
+        
         new_course= input('Ingresa el nombre del nuevo curso: ')
         create_new_course(new_course)
         print('Curso Agregado')
         print(course_register)
         run()
+        
 
     elif num == 2:
-        if course_register != 0:
+        if course_register != {}:
             
             print (course_register)
             course_index = int(input('Selecciona numero de curso a editar: '))
@@ -39,9 +41,9 @@ def select_action(num):
             # edit_course()
         else:
             print('No hay cursos registrados')
-
+            run()
     elif num == 3:
-        if course_register != 0:
+        if course_register != {}:
             print (course_register)
             course_index = int(input('Selecciona numero de curso a eliminar: '))
             remove_course(course_index)
@@ -50,13 +52,15 @@ def select_action(num):
             run()
         else:
             print('No hay cursos registrados')
+            run()
 
     elif num == 4:
-        if course_register != 0:
+        if course_register != {}:
             print (course_register)
             run()
         else:
             print('No hay cursos registrados')
+            run()
     elif num == 5:
         exit
     else:
@@ -69,7 +73,11 @@ def create_new_course(new):
     course_register[max_index]= new
     
 def edit_course(key, name):
-    course_register[key] = name 
+    if 0 < key <= len(course_register):
+        course_register[key] = name
+    else:
+        print('Numero no existe')
+        run()
 
 def remove_course(key):
     for i in course_register:
