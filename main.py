@@ -72,18 +72,17 @@ def edit_course(key, name):
     course_register[key] = name 
 
 def remove_course(key):
+    for i in course_register:
+        if i >= key and i < len(course_register):
+            course_register[i]=course_register[i+1]
     
-    course_register.pop(key)
+    course_register.pop(len(course_register))
 
 def run():
     
     print_initial()
     command = int(input('Ingresa un numero de comando:'))
-    select_action(command)
-    
-    
-        
-        
+    select_action(command)  
 
 
 if __name__ == '__main__':
