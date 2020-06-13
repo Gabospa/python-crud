@@ -1,5 +1,7 @@
 
 import time
+from os import system, name
+from time import sleep
 
 course_register = {
     1: 'Introduccion a programacion',
@@ -25,6 +27,8 @@ def select_action(num):
         create_new_course(new_course)
         print('Curso Agregado')
         print(course_register)
+        time.sleep(3)
+        clear()
         run()
         
 
@@ -37,8 +41,10 @@ def select_action(num):
             edit_course(course_index,name_edition)
             print('Nombre editado')
             print(course_register)
+            time.sleep(3)
+            clear()
             run()
-            # edit_course()
+            
         else:
             print('No hay cursos registrados')
             run()
@@ -47,9 +53,7 @@ def select_action(num):
             print (course_register)
             course_index = int(input('Selecciona numero de curso a eliminar: '))
             remove_course(course_index)
-            print('Curso eliminado ')
-            print(course_register)
-            run()
+            
         else:
             print('No hay cursos registrados')
             run()
@@ -57,6 +61,7 @@ def select_action(num):
     elif num == 4:
         if course_register != {}:
             print (course_register)
+            time.sleep(5)
             run()
         else:
             print('No hay cursos registrados')
@@ -76,15 +81,33 @@ def edit_course(key, name):
     if 0 < key <= len(course_register):
         course_register[key] = name
     else:
-        print('Numero no existe')
+        print('El curso no existe')
         run()
 
 def remove_course(key):
-    for i in course_register:
-        if i >= key and i < len(course_register):
-            course_register[i]=course_register[i+1]
+    if 0 < key <= len(course_register):
+        for i in course_register:
+            if i >= key and i < len(course_register):
+                course_register[i]=course_register[i+1]
+        course_register.pop(len(course_register))
+        print('Curso eliminado ')
+        print(course_register)
+        time.sleep(3)
+        clear()
+        run()
+    else:
+        print('El curso no existe')
+
+def clear():
     
-    course_register.pop(len(course_register))
+        #for windows
+        if name == 'nt':
+            _ = system('cls')
+        
+        #for mac and linux
+        else:
+            _ = system('clear')
+
 
 def run():
     
